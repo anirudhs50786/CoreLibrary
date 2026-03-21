@@ -1,5 +1,7 @@
 package com.motocart.library.common.types;
 
+import lombok.Getter;
+
 public class Profile {
 
     public enum Gender {
@@ -14,13 +16,14 @@ public class Profile {
         OTHER
     }
 
+    @Getter
     public enum Country {
         INDIA(0, "India"),
         UNITED_KINGDOM(1, "United Kingdom"),
         USA(2, "United States of America");
 
-        private int countryId;
-        private String displayName;
+        private final int countryId;
+        private final String displayName;
 
         Country(int countryId, String displayName) {
             this.countryId = countryId;

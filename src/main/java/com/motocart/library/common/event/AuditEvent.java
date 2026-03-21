@@ -17,7 +17,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class AuditEvent implements Serializable {
 
-    private int auditLogId;
+    private String auditLogId;
     private int entityId;
     private String action;
     private String entityType;

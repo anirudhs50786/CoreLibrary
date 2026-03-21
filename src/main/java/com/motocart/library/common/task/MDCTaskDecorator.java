@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Task Decorator for Mapped Diagnostic Context. As the MDC is thread local in async systems this context is
- * not passed to the child threads. Use this when setting up the Task Executer Service
+ * not passed to the child threads. Use this when setting up the Task Executor Service
  */
 public class MDCTaskDecorator implements TaskDecorator {
 
