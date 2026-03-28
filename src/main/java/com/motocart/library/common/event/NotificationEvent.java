@@ -1,5 +1,6 @@
 package com.motocart.library.common.event;
 
+import com.motocart.library.common.types.NotificationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Map;
 @Builder
 public class NotificationEvent implements Serializable {
 
-    private String eventType;
+    private NotificationType notificationType;
     private String recipientEmail;
     private String recipientName;
     private String subject;
