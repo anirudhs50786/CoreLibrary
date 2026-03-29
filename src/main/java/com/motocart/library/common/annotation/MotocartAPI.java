@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public @interface MotocartAPI {
 
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
