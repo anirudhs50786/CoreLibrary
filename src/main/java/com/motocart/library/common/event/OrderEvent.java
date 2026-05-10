@@ -1,5 +1,6 @@
 package com.motocart.library.common.event;
 
+import com.motocart.library.common.types.OrderEventType;
 import com.motocart.library.common.types.OrderStatus;
 import com.motocart.library.common.types.PaymentMethod;
 import com.motocart.library.common.types.PaymentStatus;
@@ -18,7 +19,8 @@ public class OrderEvent {
     private int userId;
     private int orderId;
     private OrderStatus orderStatus;
-    private double totalAmount;
+    private OrderEventType orderEventType;
+    private String couponCode;
     private PaymentStatus paymentStatus;
     private PaymentMethod paymentMethod;
     private String trackingId;

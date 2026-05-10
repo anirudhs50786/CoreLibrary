@@ -1,12 +1,18 @@
 package com.motocart.library.common.dto;
 
 import com.motocart.library.common.types.Profile;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserAddressDTO implements Serializable {
 
     private int userAddressId;

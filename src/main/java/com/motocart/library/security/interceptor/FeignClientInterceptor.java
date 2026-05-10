@@ -18,8 +18,7 @@ public class FeignClientInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Principal principal = (Principal) authentication.getPrincipal();
+        if (authentication != null && authentication.getPrincipal() instanceof Principal principal) {
             String userId = String.valueOf(principal.userId());
             String userName = principal.username();
 
