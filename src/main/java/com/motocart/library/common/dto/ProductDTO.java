@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 public class ProductDTO implements Serializable {
 
     private int productId;
+    private int categoryId;
     private String productName;
     private String productCode;
     private String firmName;

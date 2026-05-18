@@ -48,13 +48,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<String> handleFeignException(FeignException ex) {
-        log.error("Downstream service error: {}, stacktrace: {}", ex.getMessage(), ex.getStackTrace());
+        log.error("Downstream service error: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("Downstream service error");
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception ex) {
-        log.error("Unexpected error: {}, stacktrace: {}", ex.getMessage(), ex.getStackTrace());
+        log.error("Unexpected error: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
     }
 }
