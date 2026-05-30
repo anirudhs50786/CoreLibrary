@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProductReviewDTO {
     private int rating;
     private String comment;
     private int helpfulVotes;
+    @Nullable
     private List<String> mediaLinks;
     private String reviewedBy;
     private LocalDateTime reviewedAt;

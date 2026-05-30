@@ -4,6 +4,7 @@ import com.motocart.library.cache.CacheNames;
 import com.motocart.library.cache.RedisCacheService;
 import com.motocart.library.common.dto.EntitlementsDTO;
 import com.motocart.library.common.types.Permission;
+import com.motocart.library.security.AuthHelper;
 import com.motocart.library.security.Principal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -46,5 +47,23 @@ public class EntitlementService {
             log.warn("Access denied for permission: {}", permission);
             throw new AccessDeniedException("User is not authorized to access " + permission);
         }
+    }
+
+    public void canAccess(Permission... permissions) {
+        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        EntitlementsDTO entitlements = getEntitlements(principal.userId());
+        for (Permission permission : permissions) {
+            if (!entitlements.getPermissions().contains(permission.name())) {
+                log.warn("Access denied for permission: {}", permission);
+                throw new AccessDeniedException("User is not authorized to access " + permission);
+            }
+        }
+    }
+
+    public static void isResourceOwner(int ownerId) {
+        if (AuthHelper.getAuthUserId() == ownerId) {
+            return;
+        }
+        throw new AccessDeniedException("User is not authorized to access this resource");
     }
 }

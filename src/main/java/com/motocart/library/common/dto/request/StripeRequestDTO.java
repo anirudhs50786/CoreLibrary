@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +12,6 @@ import java.util.List;
 public class StripeRequestDTO {
     private String userId;
     private String orderId;
-    private List<StripeLineItemDTO> lineItemDTOList;
     private String successUrl;
     private String cancelUrl;
 }
