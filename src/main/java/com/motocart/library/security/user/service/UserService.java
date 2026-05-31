@@ -35,7 +35,7 @@ public class UserService {
         return userVO;
     }
 
-    public UserVO getUser() {
+    public UserVO getLoggedInUser() {
         return getUserById(AuthHelper.getAuthUserId());
     }
 
@@ -48,6 +48,12 @@ public class UserService {
                 .firstName(profile.getFirstName())
                 .lastName(profile.getLastName())
                 .build();
+    }
+
+    public String getFormattedName(int userId) {
+        UserVO user = getUserById(userId);
+        return user.getFirstName() + " " + user.getLastName();
+
     }
 
 }

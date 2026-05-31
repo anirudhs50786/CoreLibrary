@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -16,9 +17,9 @@ import java.util.Map;
 public class NotificationEvent implements Serializable {
 
     private NotificationType notificationType;
-    @Deprecated
+    @Nullable
     private String recipientEmail;
-    @Deprecated
+    @Nullable
     private String recipientName;
     private int userId;
     private String subject;
