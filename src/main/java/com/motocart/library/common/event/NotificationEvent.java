@@ -16,8 +16,11 @@ import java.util.Map;
 public class NotificationEvent implements Serializable {
 
     private NotificationType notificationType;
+    @Deprecated
     private String recipientEmail;
+    @Deprecated
     private String recipientName;
+    private int userId;
     private String subject;
     private Map<String, Object> payload;
 

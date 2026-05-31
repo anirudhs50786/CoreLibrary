@@ -1,9 +1,7 @@
-package com.motocart.library.common.dto;
+package com.motocart.library.common.dto.response;
 
+import com.motocart.library.common.dto.UserAddressDTO;
 import com.motocart.library.common.types.Profile;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,23 +15,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserProfileDTO implements Serializable {
+public class UserProfileResponseDTO implements Serializable {
 
-    @NotBlank
+    private int userId;
+    private String username;
+    private String email;
     private String firstName;
-
-    @NotBlank
     private String lastName;
-
-    @Size(min = 6, max = 15, message = "Invalid phone number")
     private long phoneNumber;
-
     private Profile.Gender gender;
-
-    @Past
     private Instant dateOfBirth;
-
     private String profileImageUrl;
-
     private List<UserAddressDTO> userAddressDTOList;
 }

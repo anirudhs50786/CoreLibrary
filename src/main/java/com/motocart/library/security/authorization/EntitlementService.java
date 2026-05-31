@@ -1,15 +1,12 @@
-package com.motocart.library.security.authentication;
+package com.motocart.library.security.authorization;
 
 import com.motocart.library.cache.CacheNames;
 import com.motocart.library.cache.RedisCacheService;
 import com.motocart.library.common.dto.EntitlementsDTO;
 import com.motocart.library.common.types.Permission;
 import com.motocart.library.security.AuthHelper;
-import com.motocart.library.security.Principal;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -21,8 +18,7 @@ public class EntitlementService {
     private final EntitlementServiceClient entitlementServiceClient;
     private final RedisCacheService cacheService;
 
-    public EntitlementService(EntitlementServiceClient entitlementServiceClient, RedisCacheService cacheService,
-                              RedisTemplate<String, EntitlementsDTO> redisTemplate) {
+    public EntitlementService(EntitlementServiceClient entitlementServiceClient, RedisCacheService cacheService) {
         this.entitlementServiceClient = entitlementServiceClient;
         this.cacheService = cacheService;
     }
@@ -41,8 +37,7 @@ public class EntitlementService {
     }
 
     public void canAccess(Permission permission) {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        EntitlementsDTO entitlements = getEntitlements(principal.userId());
+        EntitlementsDTO entitlements = getEntitlements(AuthHelper.getAuthUserId());
         if (!entitlements.getPermissions().contains(permission.name())) {
             log.warn("Access denied for permission: {}", permission);
             throw new AccessDeniedException("User is not authorized to access " + permission);
@@ -50,8 +45,7 @@ public class EntitlementService {
     }
 
     public void canAccess(Permission... permissions) {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        EntitlementsDTO entitlements = getEntitlements(principal.userId());
+        EntitlementsDTO entitlements = getEntitlements(AuthHelper.getAuthUserId());
         for (Permission permission : permissions) {
             if (!entitlements.getPermissions().contains(permission.name())) {
                 log.warn("Access denied for permission: {}", permission);

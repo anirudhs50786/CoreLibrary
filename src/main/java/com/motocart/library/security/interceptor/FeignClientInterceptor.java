@@ -17,10 +17,11 @@ public class FeignClientInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null && authentication.getPrincipal() instanceof Principal principal) {
-            String userId = String.valueOf(principal.userId());
-            String userName = principal.username();
+        // need a system user for kafka flow
+        if (authentication != null && authentication.getPrincipal() instanceof Principal(
+                int id, String userName, String emailId
+        )) {
+            String userId = String.valueOf(id);
 
             String roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -29,6 +30,7 @@ public class FeignClientInterceptor implements RequestInterceptor {
             template.header(HttpConstants.USER_ID_HEADER, userId);
             template.header(HttpConstants.USER_ROLES_HEADER, roles);
             template.header(HttpConstants.USERNAME_HEADER, userName);
+            template.header(HttpConstants.EMAIL_ID_HEADER, emailId);
         }
     }
 }

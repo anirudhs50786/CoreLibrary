@@ -1,4 +1,4 @@
-package com.motocart.library.security.authentication;
+package com.motocart.library.security.authorization;
 
 import com.motocart.library.common.dto.EntitlementsDTO;
 import org.springframework.cloud.openfeign.FeignClient;

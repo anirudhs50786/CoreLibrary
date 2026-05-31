@@ -25,4 +25,22 @@ public class AuthHelper {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
+
+    public static String getAuthUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof Principal user) {
+            return user.username();
+        }
+        throw new IllegalStateException("Principal is of unsupported type");
+    }
+
+    public static String getAuthEmailId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof Principal user) {
+            return user.emailId();
+        }
+        throw new IllegalStateException("Principal is of unsupported type");
+    }
 }

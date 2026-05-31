@@ -1,4 +1,4 @@
 package com.motocart.library.security;
 
-public record Principal(int userId, String username) {
+public record Principal(int userId, String username, String emailId) {
 }

@@ -24,9 +24,10 @@ public class HeaderAuthenticationFilter extends OncePerRequestFilter {
         String userId = request.getHeader(HttpConstants.USER_ID_HEADER);
         String username = request.getHeader(HttpConstants.USERNAME_HEADER);
         String roles = request.getHeader(HttpConstants.USER_ROLES_HEADER);
+        String emailId = request.getHeader(HttpConstants.EMAIL_ID_HEADER);
 
         if (userId != null && username != null && roles != null) {
-            Principal principal = new Principal(Integer.parseInt(userId), username);
+            Principal principal = new Principal(Integer.parseInt(userId), username, emailId);
 
             List<SimpleGrantedAuthority> authorities = Arrays.stream(roles.split(","))
                     .map(String::trim)
