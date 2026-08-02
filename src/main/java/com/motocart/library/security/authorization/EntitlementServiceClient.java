@@ -12,5 +12,5 @@ public interface EntitlementServiceClient {
     EntitlementsDTO getEntitlementsForLoggedInUser();
 
     @GetMapping("/{userId}")
-    EntitlementsDTO getEntitlements(@PathVariable int userId);
+    EntitlementsDTO getEntitlements(@PathVariable("userId") int userId);
 }
